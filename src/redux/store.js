@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import apiReducer, { api } from '../api/apiSlice';  // Adjust the path based on your directory structure
 import uiReducer from '../ui/uiSlice';
+import { setupListeners } from '@reduxjs/toolkit/query'
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
 });
 
 // Setup listeners for any RTK-Query lifecycle events you want to monitor
-api.setupListeners(store.dispatch);
+// api.setupListeners(store.dispatch);
+setupListeners(store.dispatch);
 
 export default store;
