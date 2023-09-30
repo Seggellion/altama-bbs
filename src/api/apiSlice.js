@@ -7,7 +7,7 @@ export const api = createApi({
   endpoints: (builder) => ({
     // Endpoint to fetch all posts
     getPosts: builder.query({
-      query: () => 'posts',
+        query: () => 'api/posts'
     }),
     
     // Endpoint to create a new post
