@@ -9,8 +9,8 @@ function Sidebar() {
         <p>Status: Online</p>
       </Box>
       <Nav>
-        <Anchor href="/" label="Home" />
-        <Anchor href="/forums" label="Forums" />
+        <Link to="/">Home</Link>
+        <Link to="/forums">Forums</Link>
         {/* Add more links as needed */}
       </Nav>
     </Box>
