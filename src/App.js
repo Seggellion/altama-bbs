@@ -3,6 +3,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Outlet } from 'react-router-dom';
 import PostsList from './components/PostsList';
+import CreatePost from './components/CratePost';
 import AppLayout from './components/AppLayout';
 import './App.css';
 
