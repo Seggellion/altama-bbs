@@ -28,6 +28,19 @@ app.get('/api/posts', async (req, res) => {
     }
 });
 
+
+app.post('/api/posts', async (req, res) => {
+    const { title, body, userId } = req.body;  // Adjust based on the payload structure
+    try {
+      const result = await pool.query('INSERT INTO forum_posts (title, body, user_id) VALUES ($1, $2, $3) RETURNING *', [title, body, userId]);
+      res.json(result.rows[0]);
+    } catch (error) {
+      console.error('Error inserting post:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+  
+
 // Test API endpoint
 app.get('/api/test', (req, res) => {
     console.log("API Test route hit");
