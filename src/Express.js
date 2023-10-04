@@ -30,6 +30,7 @@ app.get('/api/posts', async (req, res) => {
 });
 
 app.get('/api/test', (req, res) => {
+    console.log('API Test route hit');
     res.send('Hello World');
 });
 
