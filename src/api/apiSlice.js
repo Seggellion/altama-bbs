@@ -13,7 +13,7 @@ export const api = createApi({
         query: () => 'categories' // Adjust this to the correct endpoint for fetching categories.
     }),
     getUserId: builder.query({
-        query: (username) => `users/${username}` // Assuming this is the endpoint to fetch a user by username.
+        query: (username) => `user/${username}` // Assuming this is the endpoint to fetch a user by username.
     }),    
     // Endpoint to create a new post
     addPost: builder.mutation({
