@@ -12,12 +12,20 @@ export const api = createApi({
     
     // Endpoint to create a new post
     addPost: builder.mutation({
-      query: (newPost) => ({
+        query: (newPost) => ({
         url: 'posts',
         method: 'POST',
         body: newPost,
-      }),
+        }),
+        transformResponse: (response, meta) => {
+        // Check for error response and handle it
+        if (!response.success) {
+            return { error: response.message };
+        }
+        return response;
+        },
     }),
+    
     
     // Endpoint to fetch comments for a specific post
     getComments: builder.query({
