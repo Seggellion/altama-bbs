@@ -1,4 +1,5 @@
-import { Box, Nav, Anchor } from 'grommet';
+import { Box, Nav } from 'grommet';
+import { Link } from 'react-router-dom';
 
 function Sidebar() {
   return (
