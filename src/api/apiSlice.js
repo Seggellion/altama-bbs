@@ -9,6 +9,9 @@ export const api = createApi({
     getPosts: builder.query({
         query: () => 'posts'
     }),
+    getCategories: builder.query({
+        query: () => 'categories' // Adjust this to the correct endpoint for fetching categories.
+    }),
     
     // Endpoint to create a new post
     addPost: builder.mutation({
@@ -50,6 +53,7 @@ export const {
   useGetPostsQuery, 
   useAddPostMutation, 
   useGetCommentsQuery, 
+  useGetCategoriesQuery,
   useAddCommentMutation 
 } = api;
 
