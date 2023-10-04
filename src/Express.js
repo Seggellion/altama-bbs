@@ -1,25 +1,25 @@
 const express = require('express');
 const { Pool } = require('pg');
 const cors = require('cors');
+const path = require('path');
 
 const app = express();
 const port = process.env.PORT || 5000;
 
 // Database connection
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,  // Set this environment variable to your Heroku Postgres connection string
+  connectionString: process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false
   }
 });
 
 // Middleware
-app.use(cors()); // Allow all origins for simplicity. Refine for production.
+app.use(cors());
 app.use(express.json());
 
 // API endpoint to fetch all posts
 app.get('/api/posts', async (req, res) => {
-    return res.json([{ title: "Sample Post", body: "This is a test post." }]);
   try {
     const result = await pool.query('SELECT * FROM forum_posts');
     res.json(result.rows);
@@ -31,6 +31,14 @@ app.get('/api/posts', async (req, res) => {
 
 app.get('/api/test', (req, res) => {
     res.send('Hello World');
+});
+
+// Serve static files AFTER defining all other routes
+app.use(express.static(path.join(__dirname, 'build')));
+
+// Fallback to index.html for React Router
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
 // Start the server
