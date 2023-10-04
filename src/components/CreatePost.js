@@ -6,8 +6,23 @@ function CreatePost() {
   const [category, setCategory] = useState('');
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
-  const [addPost] = useAddPostMutation();
+  // const [addPost] = useAddPostMutation();
+  const [addPost, { isLoading, isError, isSuccess }] = useAddPostMutation();
 
+
+    // Function to handle form submission
+    const handleSubmit = async (formData) => {
+        try {
+        await addPost(formData);
+        if (isSuccess) {
+            // Optionally redirect or show a success message
+            console.log('Post added successfully');
+        }
+        } catch (error) {
+        console.error('Error adding post:', error);
+        }
+    };
+/*
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -22,7 +37,7 @@ function CreatePost() {
       alert('Error creating post.');
     }
   };
-
+*/
   return (
     <div>
       <h2>Create New Post</h2>
