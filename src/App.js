@@ -1,24 +1,17 @@
 // src/App.js
 
 import React from 'react';
-import { Grommet } from 'grommet';
+// import { Grommet } from 'grommet';
 import PostsList from './components/PostsList';
+import AppLayout from './components/AppLayout';
 // import logo from './logo.svg';
 import './App.css';
 
 function App() {
   return (
-    <Grommet>
-      <div className="App">
-        <header className="App-header">
-          <h1>Welcome to Altama BBS</h1>
-        </header>
-        <main>
-          <PostsList />
-          {/* Other components go here */}
-        </main>
-      </div>
-    </Grommet>
+    <AppLayout>
+      {/* Other components and logic specific to the main application can be added here */}
+    </AppLayout>
   );
 }
 
