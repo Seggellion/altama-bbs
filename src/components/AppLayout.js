@@ -7,7 +7,7 @@ function AppLayout() {
     <Grommet theme={grommet} full>
       <Box fill>
         <Header background="brand" pad="medium">
-          <Text size="large" weight="bold">Star Citizen BBS</Text>
+          <Text size="large" weight="bold">Altama BBS</Text>
           {/* Add navigation items or user profile here */}
         </Header>
         

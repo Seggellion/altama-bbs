@@ -1,17 +1,28 @@
 // src/App.js
 
 import React from 'react';
-// import { Grommet } from 'grommet';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import PostsList from './components/PostsList';
 import AppLayout from './components/AppLayout';
-// import logo from './logo.svg';
 import './App.css';
 
 function App() {
   return (
-    <AppLayout>
-      {/* Other components and logic specific to the main application can be added here */}
-    </AppLayout>
+    <Router>
+      <AppLayout>
+        <Switch>
+          <Route path="/post/:postId">
+            {/* Placeholder for individual post details. You can create and import a PostDetail component later. */}
+            {/* <PostDetail /> */}
+            <div>Post Detail Placeholder</div>
+          </Route>
+          
+          <Route path="/" exact>
+            <PostsList />
+          </Route>
+        </Switch>
+      </AppLayout>
+    </Router>
   );
 }
 
