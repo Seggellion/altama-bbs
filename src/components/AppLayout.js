@@ -4,7 +4,7 @@ import CustomSidebarContent from './Sidebar';  // Adjust the path based on your 
 
 import { grommet } from 'grommet/themes';
 
-function AppLayout() {
+function AppLayout({ children }) {
   return (
     <Grommet theme={grommet} full>
       <Box fill>
@@ -15,14 +15,12 @@ function AppLayout() {
         
         <Box direction="row" flex overflow={{ horizontal: 'hidden' }}>
           <Main pad="medium" flex>
-            {/* Main content goes here, e.g., list of posts or post details */}
-            <Text>Main Content Area</Text>
+            {children}  {/* Render the appropriate content based on the route */}
           </Main>
 
-        <Sidebar background="light-5" width="medium" pad="medium">
+          <Sidebar background="light-5" width="medium" pad="medium">
             <CustomSidebarContent />
-        </Sidebar>
-
+          </Sidebar>
         </Box>
       </Box>
     </Grommet>
