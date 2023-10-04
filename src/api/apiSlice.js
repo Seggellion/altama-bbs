@@ -17,15 +17,15 @@ export const api = createApi({
     }),    
     // Endpoint to create a new post
     addPost: builder.mutation({        
-        query: (newPost) => ({
-        url: 'posts',
-        method: 'POST',
-        body: newPost,
-        }),
-        transformResponse: (response, meta) => {        
-        console.log(`newPost:${newPost}`);
-        console.log(`response:${response}`);
-        console.log(`query:${query}`);
+        query: (newPost) => {
+        console.log("New post data being sent:", newPost);
+        return {
+            url: 'posts',
+            method: 'POST',
+            body: newPost,
+        }
+        },
+        transformResponse: (response, meta) => {
         // Check for error response and handle it
         if (!response.success) {
             return { error: response.message };

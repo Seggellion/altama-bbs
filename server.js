@@ -58,6 +58,7 @@ app.get('/api/user/:username', async (req, res) => {
 
 app.post('/api/posts', async (req, res) => {
     const { title, body, userId } = req.body;  // Adjust based on the payload structure
+    console.log("Received request body:", req.body);
     try {
       const result = await pool.query('INSERT INTO forum_posts (title, body, user_id) VALUES ($1, $2, $3) RETURNING *', [title, body, userId]);
       res.json(result.rows[0]);
