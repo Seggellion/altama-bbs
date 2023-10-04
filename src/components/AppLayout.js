@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grommet, Box, Header, Main, Sidebar, Text } from 'grommet';
-import Sidebar from 'Sidebar';  // Adjust the path based on your directory structure
+import CustomSidebarContent from './Sidebar';  // Adjust the path based on your directory structure
 
 import { grommet } from 'grommet/themes';
 
@@ -19,7 +19,9 @@ function AppLayout() {
             <Text>Main Content Area</Text>
           </Main>
 
-          <Sidebar />
+        <Sidebar background="light-5" width="medium" pad="medium">
+            <CustomSidebarContent />
+        </Sidebar>
 
         </Box>
       </Box>
