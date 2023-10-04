@@ -16,13 +16,16 @@ export const api = createApi({
         query: (username) => `user/${username}` // Assuming this is the endpoint to fetch a user by username.
     }),    
     // Endpoint to create a new post
-    addPost: builder.mutation({
+    addPost: builder.mutation({        
         query: (newPost) => ({
         url: 'posts',
         method: 'POST',
         body: newPost,
         }),
-        transformResponse: (response, meta) => {
+        transformResponse: (response, meta) => {        
+        console.log(`newPost:${newPost}`);
+        console.log(`response:${response}`);
+        console.log(`query:${query}`);
         // Check for error response and handle it
         if (!response.success) {
             return { error: response.message };
