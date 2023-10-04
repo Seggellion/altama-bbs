@@ -8,20 +8,34 @@ function CreatePost() {
   const [body, setBody] = useState('');
   // const [addPost] = useAddPostMutation();
   const [addPost, { isLoading, isError, isSuccess }] = useAddPostMutation();
+  const { data: categories } = useGetCategoriesQuery();
 
 
     // Function to handle form submission
     const handleSubmit = async (formData) => {
         try {
-        await addPost(formData);
-        if (isSuccess) {
-            // Optionally redirect or show a success message
-            console.log('Post added successfully');
-        }
+            // Fetch the userId based on the usernameValue
+            const userIdResponse = await useGetUserIdQuery(usernameValue);
+    
+            if (userIdResponse && userIdResponse.data) {
+                // Add the user_id to the formData
+                formData.user_id = userIdResponse.data;
+    
+                // Proceed to add the post
+                const postResponse = await addPost(formData);
+                if (postResponse && postResponse.data) {
+                    console.log('Post added successfully');
+                } else {
+                    console.error('Error adding post.');
+                }
+            } else {
+                console.error('Invalid username entered.');
+            }
         } catch (error) {
-        console.error('Error adding post:', error);
+            console.error('Error:', error);
         }
     };
+    
 /*
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -48,12 +62,13 @@ function CreatePost() {
           placeholder="Username"
           required
         />
-        <input
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-          placeholder="Category"
-          required
-        />
+        <select name="category" value={categoryValue} onChange={(e) => setCategoryValue(e.target.value)}>
+        {categories.map(category => (
+            <option key={category.name} value={category.name}>
+            {category.name}
+            </option>
+        ))}
+        </select>
         <input
           value={title}
           onChange={(e) => setTitle(e.target.value)}

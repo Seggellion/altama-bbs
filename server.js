@@ -28,6 +28,33 @@ app.get('/api/posts', async (req, res) => {
     }
 });
 
+app.get('/api/user/:username', async (req, res) => {
+    const { username } = req.params;
+    
+    try {
+      const result = await pool.query('SELECT id FROM users WHERE username = $1', [username]);
+      if (result.rows.length > 0) {
+        res.json(result.rows[0].id);  // Sending back the user ID
+      } else {
+        res.status(404).send('Username not found');
+      }
+    } catch (error) {
+      console.error('Error fetching user ID:', error);
+      res.status(500).send('Internal server error');
+    }
+  });
+
+  app.get('/api/categories', async (req, res) => {
+    try {
+      const result = await pool.query('SELECT name FROM ForumCategory');
+      res.json(result.rows);
+    } catch (error) {
+      console.error('Error fetching categories:', error);
+      res.status(500).send('Internal server error');
+    }
+  });
+  
+  
 
 app.post('/api/posts', async (req, res) => {
     const { title, body, userId } = req.body;  // Adjust based on the payload structure
