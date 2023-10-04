@@ -19,6 +19,7 @@ app.use(express.json());
 
 // API endpoint to fetch all posts
 app.get('/api/posts', async (req, res) => {
+    return res.json([{ title: "Sample Post", body: "This is a test post." }]);
   try {
     const result = await pool.query('SELECT * FROM forum_posts');
     res.json(result.rows);
@@ -26,6 +27,10 @@ app.get('/api/posts', async (req, res) => {
     console.error('Error fetching posts:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
+});
+
+app.get('/api/test', (req, res) => {
+    res.send('Hello World');
 });
 
 // Start the server
