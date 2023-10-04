@@ -12,6 +12,7 @@ function Sidebar() {
       <Nav>
         <Link to="/">Home</Link>
         <Link to="/forums">Forums</Link>
+        <Link to="/create-post" label="Create Post">Create post</Link>
         {/* Add more links as needed */}
       </Nav>
     </Box>
