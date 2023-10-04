@@ -12,7 +12,9 @@ export const api = createApi({
     getCategories: builder.query({
         query: () => 'categories' // Adjust this to the correct endpoint for fetching categories.
     }),
-    
+    getUserId: builder.query({
+        query: (username) => `users/${username}` // Assuming this is the endpoint to fetch a user by username.
+    }),    
     // Endpoint to create a new post
     addPost: builder.mutation({
         query: (newPost) => ({
@@ -54,7 +56,8 @@ export const {
   useAddPostMutation, 
   useGetCommentsQuery, 
   useGetCategoriesQuery,
-  useAddCommentMutation 
+  useAddCommentMutation,
+  useGetUserIdQuery
 } = api;
 
 // Export the generated reducer

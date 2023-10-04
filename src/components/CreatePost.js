@@ -11,31 +11,35 @@ function CreatePost() {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
 
-  const { data: categories } = useGetCategoriesQuery();
+  const { data: categories, isLoading: isLoadingCategories, error: categoriesError } = useGetCategoriesQuery();
   const { data: userIdData, error: userIdError } = useGetUserIdQuery(username);
-  const [addPost, { isLoading, isError, isSuccess }] = useAddPostMutation();
+  const [addPost, { isLoading: isPosting, isError, isSuccess }] = useAddPostMutation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (userIdData) {
-      const postData = {
-        user_id: userIdData,
-        category,
-        title,
-        body,
-      };
-
-      try {
-        await addPost(postData);
-        alert('Post created successfully!');
-      } catch (error) {
-        alert('Error creating post.');
-      }
-    } else {
+    if (!userIdData) {
       alert('Invalid username entered.');
+      return;
+    }
+
+    const postData = {
+      user_id: userIdData,
+      category,
+      title,
+      body,
+    };
+
+    try {
+      await addPost(postData);
+      alert('Post created successfully!');
+    } catch (error) {
+      alert('Error creating post.');
     }
   };
+
+  if (isLoadingCategories) return <div>Loading categories...</div>;
+  if (categoriesError) return <div>Error fetching categories.</div>;
 
   return (
     <div>
@@ -53,12 +57,11 @@ function CreatePost() {
           onChange={(e) => setCategory(e.target.value)}
           required
         >
-          {categories &&
-            categories.map((categoryItem) => (
-              <option key={categoryItem.id} value={categoryItem.id}>
-                {categoryItem.name}
-              </option>
-            ))}
+          {categories.map((categoryItem) => (
+            <option key={categoryItem.id} value={categoryItem.id}>
+              {categoryItem.name}
+            </option>
+          ))}
         </select>
         <input
           value={title}
@@ -72,7 +75,9 @@ function CreatePost() {
           placeholder="Body"
           required
         />
-        <button type="submit">Submit</button>
+        <button type="submit" disabled={isPosting}>
+          {isPosting ? 'Submitting...' : 'Submit'}
+        </button>
       </form>
     </div>
   );
