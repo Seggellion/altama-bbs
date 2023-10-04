@@ -22,13 +22,13 @@ function CreatePost() {
       alert('Invalid username entered.');
       return;
     }
-    console.log(`userIdData: ${userIdData}`);
+    
     const postData = {
-      user_id: userIdData,
-      category,
-      title,
-      body,
-    };
+        user_id: parseInt(userIdData),  // Convert to integer
+        forum_category_id: parseInt(category), // Use correct key and convert to integer
+        title: title,
+        body: body,
+      };
 
     try {
       await addPost(postData);

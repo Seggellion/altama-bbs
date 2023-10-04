@@ -59,8 +59,13 @@ app.get('/api/user/:username', async (req, res) => {
 app.post('/api/posts', async (req, res) => {
     const { title, body, userId } = req.body;  // Adjust based on the payload structure
     console.log("Received request body:", req.body);
+        // Convert to integer if they are strings
+        const { user_id, forum_category_id, title, body } = req.body;
+        const userIdInt = typeof user_id === 'string' ? parseInt(user_id) : user_id;
+        const categoryIdInt = typeof forum_category_id === 'string' ? parseInt(forum_category_id) : forum_category_id;
+    
     try {
-      const result = await pool.query('INSERT INTO forum_posts (title, body, user_id) VALUES ($1, $2, $3) RETURNING *', [title, body, userId]);
+      const result = await pool.query('INSERT INTO forum_posts (title, body, user_id, forum_category_id) VALUES ($1, $2, $3, $4) RETURNING *', [title, body, userIdInt, categoryIdInt]);
       res.json(result.rows[0]);
     } catch (error) {
       console.error('Error inserting post:', error);
