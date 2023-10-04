@@ -22,7 +22,7 @@ function CreatePost() {
       alert('Invalid username entered.');
       return;
     }
-
+    console.log(`userIdData: ${userIdData}`);
     const postData = {
       user_id: userIdData,
       category,
