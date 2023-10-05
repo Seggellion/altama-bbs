@@ -56,7 +56,6 @@ app.get('/api/user/:username', async (req, res) => {
 });
   
   
-
   app.post('/api/posts', async (req, res) => {
     console.log("Received request body:", req.body);
 
