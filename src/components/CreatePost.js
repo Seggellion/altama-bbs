@@ -41,6 +41,7 @@ function CreatePost() {
   if (isLoadingCategories) return <div>Loading categories...</div>;
   if (categoriesError) return <div>Error fetching categories.</div>;
 
+  console.log(categories); 
   return (
     <div>
       <h2>Create New Post</h2>
