@@ -13,7 +13,7 @@ function AppLayout({ children }) {
     <Grommet theme={customTheme} full>
       <Box fill>
         <Header background="brand" pad="medium">
-        <Text size="large" weight="bold" color="accent-1">Altama BBS</Text>
+        <Text size="large" weight="bold" color="accent-1">ɅLTɅMɅ BBS</Text>
           {/* Add navigation items or user profile here */}
         </Header>
         
