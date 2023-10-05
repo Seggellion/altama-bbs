@@ -22,7 +22,7 @@ function CreatePost() {
       alert('Invalid username entered.');
       return;
     }
-    console.log("parse Category", parseInt(category));
+    console.log("category", category);
     const postData = {
         user_id: parseInt(userIdData),  // Convert to integer
         forum_category_id: parseInt(category), // Use correct key and convert to integer
@@ -55,7 +55,10 @@ function CreatePost() {
         <select
         name="forum_category_id"
         value={category}
-        onChange={(e) => setCategory(e.target.value)}
+        onChange={(e) => {
+          console.log("Setting category to:", e.target.value);
+          setCategory(e.target.value);
+        }}
         required
         >
             {categories && categories.map((categoryItem) => (
