@@ -3,11 +3,13 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const api = createApi({
+  tagTypes: ['Post'],
   baseQuery: fetchBaseQuery({ baseUrl: '/api' }),  // Adjust the baseUrl to your backend's base URL
   endpoints: (builder) => ({
     // Endpoint to fetch all posts
     getPosts: builder.query({
-        query: () => 'posts'
+        query: () => 'posts',
+        providesTags: [{ type: 'Post', id: 'LIST' }]
     }),
     getCategories: builder.query({
         query: () => 'categories' // Adjust this to the correct endpoint for fetching categories.
@@ -17,22 +19,20 @@ export const api = createApi({
     }),    
     // Endpoint to create a new post
     addPost: builder.mutation({        
-        query: (newPost) => {
-        console.log("New post data being sent:", newPost);
-        return {
-            url: 'posts',
-            method: 'POST',
-            body: newPost,
-        }
-        },
-        transformResponse: (response, meta) => {
-        // Check for error response and handle it
-        if (!response.success) {
-            return { error: response.message };
-        }
-        return response;
-        },
-    }),
+      query: (newPost) => ({
+          url: 'posts',
+          method: 'POST',
+          body: newPost,
+      }),        
+      transformResponse: (response, meta) => {
+          // Check for error response and handle it
+          if (!response.success) {
+              return { error: response.message };
+          }
+          return response;
+      },
+      invalidatesTags: [{ type: 'Post', id: 'LIST' }],
+  }),
     
     
     // Endpoint to fetch comments for a specific post
