@@ -65,7 +65,7 @@ app.get('/api/user/:username', async (req, res) => {
     const categoryIdInt = typeof forum_category_id === 'string' ? parseInt(forum_category_id) : forum_category_id;
 
     try {
-        const result = await pool.query('INSERT INTO forum_posts (title, body, user_id, forum_category_id) VALUES ($1, $2, $3, $4) RETURNING *', [title, body, userIdInt, categoryIdInt]);
+        const result = await pool.query('INSERT INTO forum_posts (title, body, user_id, forum_category_id, created_at) VALUES ($1, $2, $3, $4, NOW()) RETURNING *', [title, body, userIdInt, categoryIdInt]);
         res.json(result.rows[0]);
     } catch (error) {
         console.error('Error inserting post:', error);
