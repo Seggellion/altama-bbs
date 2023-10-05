@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import {
   useAddPostMutation,
@@ -16,7 +16,7 @@ function CreatePost() {
   const { data: categories, isLoading: isLoadingCategories, error: categoriesError } = useGetCategoriesQuery();
   const { data: userIdData, error: userIdError } = useGetUserIdQuery(username);
   const [addPost, { isLoading: isPosting, isError, isSuccess }] = useAddPostMutation();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,7 +36,7 @@ function CreatePost() {
     try {
       await addPost(postData);
       alert('Post created successfully!');
-      history.push('/forums');  // Navigate to /forums URL
+      navigate('/forums');  // Navigate to /forums URL
     } catch (error) {
       alert('Error creating post.');
     }
