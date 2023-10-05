@@ -52,16 +52,16 @@ function CreatePost() {
           required
         />
         <select
-          name="category"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-          required
+        name="forum_category_id"
+        value={category}
+        onChange={(e) => setCategory(e.target.value)}
+        required
         >
-          {categories.map((categoryItem) => (
-            <option key={categoryItem.id} value={categoryItem.id}>
-              {categoryItem.name}
-            </option>
-          ))}
+            {categories && categories.map((categoryItem) => (
+                <option key={categoryItem.id} value={categoryItem.id}>
+                {categoryItem.name}
+                </option>
+            ))}
         </select>
         <input
           value={title}
