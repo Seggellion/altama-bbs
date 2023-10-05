@@ -17,19 +17,19 @@ function CreatePost() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    console.log("Attempting to submit");
     if (!userIdData) {
       alert('Invalid username entered.');
       return;
     }
-    
+    console.log("parse Category", parseInt(category));
     const postData = {
         user_id: parseInt(userIdData),  // Convert to integer
         forum_category_id: parseInt(category), // Use correct key and convert to integer
         title: title,
         body: body,
       };
-
+      console.log("Submitting form data:", postData);
     try {
       await addPost(postData);
       alert('Post created successfully!');
