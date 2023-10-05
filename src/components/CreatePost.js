@@ -52,21 +52,19 @@ function CreatePost() {
           placeholder="Username"
           required
         />
-        <select
-        name="forum_category_id"
-        value={category}
-        onChange={(e) => {
-          console.log("Setting category to:", e.target.value);
-          setCategory(e.target.value);
-        }}
-        required
-        >
-            {categories && categories.map((categoryItem) => (
-                <option key={categoryItem.id} value={categoryItem.id}>
-                {categoryItem.name}
-                </option>
-            ))}
-        </select>
+<select
+    name="forum_category_id"
+    value={category}
+    onChange={(e) => setCategory(e.target.value)}
+    required
+>
+    <option value="" disabled>Select a category</option>
+    {categories && categories.map((categoryItem) => (
+        <option key={categoryItem.id} value={categoryItem.id}>
+            {categoryItem.name}
+        </option>
+    ))}
+</select>
         <input
           value={title}
           onChange={(e) => setTitle(e.target.value)}
