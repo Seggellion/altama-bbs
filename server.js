@@ -47,13 +47,13 @@ app.get('/api/user/:username', async (req, res) => {
 
   app.get('/api/categories', async (req, res) => {
     try {
-      const result = await pool.query('SELECT name FROM forum_categories');
+      const result = await pool.query('SELECT id, name FROM forum_categories');
       res.json(result.rows);
     } catch (error) {
       console.error('Error fetching categories:', error);
       res.status(500).send('Internal server error');
     }
-  });
+});
   
   
 
