@@ -3,7 +3,7 @@ import { Grommet, Box, Header, Main, Sidebar, Text } from 'grommet';
 import CustomSidebarContent from './Sidebar';  // Adjust the path based on your directory structure
 
 // import customTheme from '../theme/theme';  // Adjust the path to where you saved theme.js
-const customTheme = require('../theme/theme');
+import * as customTheme from '../theme/theme';
 
 
 
