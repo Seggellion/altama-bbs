@@ -1,59 +1,75 @@
 // apiSlice.js
+import axios from 'axios';
+import { createApi } from '@reduxjs/toolkit/query/react';
 
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+const axiosBaseQuery = ({ baseUrl }) => async ({ url, method, data }) => {
+  const token = localStorage.getItem('jwt'); // Retrieve the JWT token from local storage
+  try {
+    const result = await axios({
+      url: baseUrl + url,
+      method,
+      data,
+      headers: token ? { 'Authorization': `Bearer ${token}` } : undefined,
+    });
+    return { data: result.data };
+  } catch (axiosError) {
+    let err = axiosError;
+    if (axiosError.response) {
+      err = new Error('API Server Error');
+      err.data = axiosError.response.data;
+      err.status = axiosError.response.status;
+    }
+    throw err;
+  }
+};
 
 export const api = createApi({
   tagTypes: ['Post'],
-  baseQuery: fetchBaseQuery({ baseUrl: '/api' }),  // Adjust the baseUrl to your backend's base URL
+  baseQuery: axiosBaseQuery({ baseUrl: '/api' }),
   endpoints: (builder) => ({
-    // Endpoint to fetch all posts
     getPosts: builder.query({
-        query: () => 'posts',
-        providesTags: [{ type: 'Post', id: 'LIST' }]
+      query: () => 'posts',
+      providesTags: [{ type: 'Post', id: 'LIST' }],
     }),
     getCategories: builder.query({
-        query: () => 'categories' // Adjust this to the correct endpoint for fetching categories.
+      query: () => 'categories',
     }),
     getUserId: builder.query({
-        query: (username) => `user/${username}` // Assuming this is the endpoint to fetch a user by username.
-    }),    
-    // Endpoint to create a new post
-    addPost: builder.mutation({        
-      query: (newPost) => ({
+      query: (username) => `user/${username}`,
+    }),
+    addPost: builder.mutation({
+      query: (newPost) => {
+        const token = "YOUR_JWT_TOKEN"; // Retrieve this from where you're storing it
+        return {
           url: 'posts',
           method: 'POST',
-          body: newPost,
-      }),        
+          data: newPost,
+          headers: {
+            'Authorization': `Bearer ${token}`
+          },
+        };
+      },
       transformResponse: (response, meta) => {
-          // Check for error response and handle it
-          if (!response.success) {
-              return { error: response.message };
-          }
-          return response;
+        if (!response.success) {
+          return { error: response.message };
+        }
+        return response;
       },
       invalidatesTags: [{ type: 'Post', id: 'LIST' }],
-  }),
-    
-    
-    // Endpoint to fetch comments for a specific post
+    }),
     getComments: builder.query({
       query: (postId) => `posts/${postId}/comments`,
     }),
-    
-    // Endpoint to add a comment to a specific post
     addComment: builder.mutation({
       query: ({ postId, comment }) => ({
         url: `posts/${postId}/comments`,
         method: 'POST',
-        body: comment,
+        data: comment,
       }),
     }),
-    
-    // Add more endpoints as needed
   }),
 });
 
-// Export hooks for each endpoint
 export const { 
   useGetPostsQuery, 
   useAddPostMutation, 
@@ -63,5 +79,4 @@ export const {
   useGetUserIdQuery
 } = api;
 
-// Export the generated reducer
 export default api.reducer;

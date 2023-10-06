@@ -12,7 +12,8 @@ function CreatePost() {
   const [category, setCategory] = useState('');
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
-
+  const token = localStorage.getItem('jwt'); // Retrieve the JWT token from local storage
+  const isLoggedIn = !!token; // Check if the user is logged in
   const { data: categories, isLoading: isLoadingCategories, error: categoriesError } = useGetCategoriesQuery();
   const { data: userIdData, error: userIdError } = useGetUserIdQuery(username);
   const [addPost, { isLoading: isPosting, isError, isSuccess }] = useAddPostMutation();
@@ -48,43 +49,49 @@ function CreatePost() {
   console.log(categories); 
   return (
     <div>
-      <h2>Create New Post</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          placeholder="Username"
-          required
-        />
-<select
-    name="forum_category_id"
-    value={category}
-    onChange={(e) => setCategory(e.target.value)}
-    required
->
-    <option value="" disabled>Select a category</option>
-    {categories && categories.map((categoryItem) => (
-        <option key={categoryItem.id} value={categoryItem.id}>
-            {categoryItem.name}
-        </option>
-    ))}
-</select>
-        <input
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder="Title"
-          required
-        />
-        <textarea
-          value={body}
-          onChange={(e) => setBody(e.target.value)}
-          placeholder="Body"
-          required
-        />
-        <button type="submit" disabled={isPosting}>
-          {isPosting ? 'Submitting...' : 'Submit'}
-        </button>
-      </form>
+      {isLoggedIn ? (
+        <>
+          <h2>Create New Post</h2>
+          <form onSubmit={handleSubmit}>
+            <input
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Username"
+              required
+            />
+            <select
+              name="forum_category_id"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              required
+            >
+              <option value="" disabled>Select a category</option>
+              {categories && categories.map((categoryItem) => (
+                  <option key={categoryItem.id} value={categoryItem.id}>
+                      {categoryItem.name}
+                  </option>
+              ))}
+            </select>
+            <input
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="Title"
+              required
+            />
+            <textarea
+              value={body}
+              onChange={(e) => setBody(e.target.value)}
+              placeholder="Body"
+              required
+            />
+            <button type="submit" disabled={isPosting}>
+              {isPosting ? 'Submitting...' : 'Submit'}
+            </button>
+          </form>
+        </>
+      ) : (
+        <p>Please log in to create a post.</p>
+      )}
     </div>
   );
 }
