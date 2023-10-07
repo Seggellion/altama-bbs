@@ -39,5 +39,5 @@
 
 @font-face {
   font-family: 'MSDOS';
-  src: url('/assets/dos.ttf') format('truetype');
+  src: url('/public/assets/dos.ttf') format('truetype');
 }
