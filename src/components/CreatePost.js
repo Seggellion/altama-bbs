@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import {
   useAddPostMutation,
   useGetCategoriesQuery,
-  useGetUserIdQuery,
 } from '../api/apiSlice';
 
 function CreatePost() {
@@ -15,7 +14,7 @@ function CreatePost() {
   const token = localStorage.getItem('jwt'); // Retrieve the JWT token from local storage
   const isLoggedIn = !!token; // Check if the user is logged in
   const { data: categories, isLoading: isLoadingCategories, error: categoriesError } = useGetCategoriesQuery();
-  const { data: userIdData, error: userIdError } = useGetUserIdQuery(username);
+  //const { data: userIdData, error: userIdError } = useGetUserIdQuery(username);
   const [addPost, { isLoading: isPosting, isError, isSuccess }] = useAddPostMutation();
   const navigate = useNavigate();
 
