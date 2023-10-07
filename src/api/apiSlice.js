@@ -5,11 +5,17 @@ const axiosBaseQuery = ({ baseUrl }) => async ({ url, method, data }) => {
   const token = localStorage.getItem('jwtToken');  // Retrieve JWT token from local storage
 
   const headers = {};
+  console.log("Request URL:", baseUrl + url);
+  console.log("Request Method:", method);
+  console.log("Request Headers:", headers);
+
   if (token) {
     headers.Authorization = `Bearer ${token}`;
   }
   try {
     const result = await axios({ url: baseUrl + url, method, data, headers });
+    console.log("Response Data:", result.data);
+
     return { data: result.data };
   } catch (axiosError) {
     let err = axiosError;
