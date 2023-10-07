@@ -6,7 +6,7 @@ import { useGetUserQuery } from '../api/apiSlice'; // Adjust the import based on
 
 function Sidebar() {
   const [userId, setUserId] = useState(null);
-  console.log('userId', userId);
+
   useEffect(() => {
     const token = localStorage.getItem('jwtToken');
     if (token) {
@@ -18,7 +18,7 @@ function Sidebar() {
   const { data: user, isLoading, isError } = useGetUserQuery(userId, {
     skip: !userId, // Skip the query if userId is null
   });
-
+  console.log('userId::', userId);
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>Error loading user information.</p>;
   console.log('user:', user);

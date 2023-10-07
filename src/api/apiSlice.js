@@ -40,9 +40,6 @@ export const api = createApi({
     getCategories: builder.query({
       query: () => 'categories',
     }),
-    getUserId: builder.query({
-      query: (username) => `user/${username}`,
-    }),
     // Add this to your list of endpoints in apiSlice.js
     getUser: builder.query({
       query: (userId) => `user/${userId}`,
@@ -82,7 +79,6 @@ export const {
   useGetCommentsQuery, 
   useGetCategoriesQuery,
   useAddCommentMutation,
-  useGetUserIdQuery,
   useGetUserQuery
 } = api;
 
