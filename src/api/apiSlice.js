@@ -82,7 +82,8 @@ export const {
   useGetCommentsQuery, 
   useGetCategoriesQuery,
   useAddCommentMutation,
-  useGetUserIdQuery
+  useGetUserIdQuery,
+  useGetUserQuery
 } = api;
 
 export default api.reducer;
