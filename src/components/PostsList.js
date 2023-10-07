@@ -4,11 +4,11 @@ import React from 'react';
 import { useGetPostsQuery } from '../api/apiSlice';
 
 function PostsList() {
-  console.log("Rendering PostsList");
+
 
   // Use the generated query hook
   const { data: posts, isLoading, isError } = useGetPostsQuery();
-
+  console.log("query hook completed");
   // Loading state
   if (isLoading) {
     return <div>Loading...</div>;
