@@ -63,10 +63,10 @@ function CreatePost() {
               required
             >
               <option value="" disabled>Select a category</option>
-              {categories && categories.map((categoryItem) => (
-                  <option key={categoryItem.id} value={categoryItem.id}>
-                      {categoryItem.name}
-                  </option>
+              {Array.isArray(categories) && categories.map((categoryItem) => (
+                <option key={categoryItem.id} value={categoryItem.id}>
+                  {categoryItem.name}
+                </option>
               ))}
             </select>
             <input
