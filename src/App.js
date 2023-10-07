@@ -1,6 +1,5 @@
 // src/App.js
-
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Outlet } from 'react-router-dom';
 import PostsList from './components/PostsList';
 import CreatePost from './components/CreatePost';
