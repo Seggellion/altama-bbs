@@ -21,7 +21,7 @@ function Sidebar() {
 
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>Error loading user information.</p>;
-
+  console.log('user:', user);
   return (
     <Box background="light-2" width="medium" pad="medium">
       <Box>
