@@ -30,21 +30,21 @@ app.get('/api/posts', async (req, res) => {
     }
 });
 
-app.get('/api/user/:username', async (req, res) => {
-    const { username } = req.params;
-    
-    try {
-      const result = await pool.query('SELECT id FROM users WHERE username = $1', [username]);
-      if (result.rows.length > 0) {
-        res.json(result.rows[0].id);  // Sending back the user ID
-      } else {
-        res.status(404).send('Username not found');
-      }
-    } catch (error) {
-      console.error('Error fetching user ID:', error);
-      res.status(500).send('Internal server error');
+app.get('/api/user/:userId', async (req, res) => {
+  const { userId } = req.params;
+  
+  try {
+    const result = await pool.query('SELECT id, username, profile_image FROM users WHERE id = $1', [userId]);
+    if (result.rows.length > 0) {
+      res.json(result.rows[0]);  // Sending back the full user details
+    } else {
+      res.status(404).send('User not found');
     }
-  });
+  } catch (error) {
+    console.error('Error fetching user details:', error);
+    res.status(500).send('Internal server error');
+  }
+});
 
   app.get('/api/categories', async (req, res) => {
     try {

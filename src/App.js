@@ -8,6 +8,14 @@ import AppLayout from './components/AppLayout';
 import './App.css';
 
 function App() {
+    // This useEffect runs when the App component mounts
+    useEffect(() => {
+      const token = getQueryParam('token');
+      if (token) {
+        localStorage.setItem('jwtToken', token);
+      }
+    }, []); // The empty array means this useEffect runs only once when the component mounts
+  
   return (
     <Router>
       <AppLayout>
