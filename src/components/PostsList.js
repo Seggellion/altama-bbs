@@ -4,11 +4,9 @@ import React from 'react';
 import { useGetPostsQuery } from '../api/apiSlice';
 
 function PostsList() {
-
-
   // Use the generated query hook
   const { data: posts, isLoading, isError } = useGetPostsQuery();
-  console.log("query hook completed");
+
   // Loading state
   if (isLoading) {
     return <div>Loading...</div>;
@@ -18,14 +16,18 @@ function PostsList() {
   if (isError || !posts) {
     return <div>Error loading posts</div>;
   }
-  console.log(posts);
+
   // Render the list of posts
   return (
     <div>
       <h2>Posts</h2>
       <ul>
         {Array.isArray(posts) && posts.map((post) => (
-          <li key={post.id}>{post.title}</li>  // Adjust based on your post structure
+          <li key={post.id}>
+            <strong>{post.title}</strong> {/* Post Title */}
+            <span> by {post.username} </span> {/* Username */}
+            <span> at {new Date(post.created_at).toLocaleString()} </span> {/* Created At */}
+          </li>
         ))}
       </ul>
     </div>

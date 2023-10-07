@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'; // Add useEffect
 import { useNavigate } from 'react-router-dom';
 import jwt_decode from "jwt-decode"; // Import jwt_decode
+import './CreatePost.css';
 
 import {
   useAddPostMutation,
@@ -57,29 +58,18 @@ function CreatePost() {
           <h2>Create New Post</h2>
           <form onSubmit={handleSubmit}>
             <select
-              name="forum_category_id"
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-              required
+              className="form-element" // Apply the CSS class
+              // ... (existing props)
             >
-              <option value="" disabled>Select a category</option>
-              {Array.isArray(categories) && categories.map((categoryItem) => (
-                <option key={categoryItem.id} value={categoryItem.id}>
-                  {categoryItem.name}
-                </option>
-              ))}
+              {/* ... (existing options) */}
             </select>
             <input
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              placeholder="Title"
-              required
+              className="form-element" // Apply the CSS class
+              // ... (existing props)
             />
             <textarea
-              value={body}
-              onChange={(e) => setBody(e.target.value)}
-              placeholder="Body"
-              required
+              className="form-element" // Apply the CSS class
+              // ... (existing props)
             />
             <button type="submit" disabled={isPosting}>
               {isPosting ? 'Submitting...' : 'Submit'}
