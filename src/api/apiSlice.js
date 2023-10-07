@@ -1,4 +1,3 @@
-// apiSlice.js
 import axios from 'axios';
 import { createApi } from '@reduxjs/toolkit/query/react';
 
@@ -42,10 +41,7 @@ export const api = createApi({
         return {
           url: 'posts',
           method: 'POST',
-          data: newPost,
-          headers: {
-            'Authorization': `Bearer ${token}`
-          },
+          data: newPost
         };
       },
       transformResponse: (response, meta) => {
