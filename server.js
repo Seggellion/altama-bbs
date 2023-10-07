@@ -21,8 +21,8 @@ app.use(express.json());
 // API endpoint to fetch all posts
 app.get('/api/posts', async (req, res) => {
     try {
-        const result = await pool.query('SELECT * FROM forum_posts');  // Assuming your table name is "forum_posts"
-        console.log("Database Result:", result.rows);  // Right after you get the result
+        //const result = await pool.query('SELECT * FROM forum_posts');  // Assuming your table name is "forum_posts"        
+        const result = await pool.query('SELECT forum_posts.*, users.username FROM forum_posts INNER JOIN users ON forum_posts.user_id = users.id');
         res.json(result.rows);
     } catch (err) {
         console.error(err);
@@ -59,7 +59,6 @@ app.get('/api/user/:userId', async (req, res) => {
   
   
   app.post('/api/posts', async (req, res) => {
-    console.log("Received request body:", req.body);
 
     // Destructure and convert to integer if they are strings
     const { user_id, forum_category_id, title, body } = req.body;
