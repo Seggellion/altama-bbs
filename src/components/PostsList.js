@@ -18,7 +18,7 @@ function PostsList() {
   if (isError || !posts) {
     return <div>Error loading posts</div>;
   }
-
+  console.log(posts);
   // Render the list of posts
   return (
     <div>
