@@ -38,7 +38,7 @@ export const api = createApi({
       providesTags: [{ type: 'Post', id: 'LIST' }],
     }),
     getCategories: builder.query({
-      query: () => 'categories',
+      query: () => ({ url: 'categories', method: 'GET' }),
     }),
     // Add this to your list of endpoints in apiSlice.js
     getUser: builder.query({
