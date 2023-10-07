@@ -22,7 +22,7 @@ function AppLayout({ children }) {
             {children}  {/* Render the appropriate content based on the route */}
           </Main>
 
-          <Sidebar background="light-1" width="medium" pad="medium">
+          <Sidebar background="black" width="medium" pad="medium">
             <CustomSidebarContent />
           </Sidebar>
         </Box>
