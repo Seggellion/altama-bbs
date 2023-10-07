@@ -33,7 +33,7 @@ export const api = createApi({
   baseQuery: axiosBaseQuery({ baseUrl: '/api' }),
   endpoints: (builder) => ({
     getPosts: builder.query({
-      query: () => 'posts',
+      query: () => ({ url: 'posts', method: 'GET' }),
       providesTags: [{ type: 'Post', id: 'LIST' }],
     }),
     getCategories: builder.query({

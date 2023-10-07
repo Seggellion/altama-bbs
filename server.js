@@ -22,6 +22,7 @@ app.use(express.json());
 app.get('/api/posts', async (req, res) => {
     try {
         const result = await pool.query('SELECT * FROM forum_posts');  // Assuming your table name is "forum_posts"
+        console.log("Database Result:", result.rows);  // Right after you get the result
         res.json(result.rows);
     } catch (err) {
         console.error(err);
