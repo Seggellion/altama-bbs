@@ -39,7 +39,6 @@ export const api = createApi({
     }),
     addPost: builder.mutation({
       query: (newPost) => {
-        const token = "YOUR_JWT_TOKEN"; // Retrieve this from where you're storing it
         return {
           url: 'posts',
           method: 'POST',
