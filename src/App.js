@@ -23,7 +23,7 @@ function App() {
           <Route path="/post/:postId" element={<div>Post Detail Placeholder</div>} />
           <Route path="/forums" element={<PostsList />} />
           <Route path="/create-post" element={<CreatePost />} />
-          <Route path="/" element={<div>Home</div>} />
+          <Route path="/" element={<Home />} />
         </Routes>
       </AppLayout>
     </Router>
