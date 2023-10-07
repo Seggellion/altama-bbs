@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react'; // Add useEffect
 import { useNavigate } from 'react-router-dom';
+import jwt_decode from "jwt-decode"; // Import jwt_decode
 
 import {
   useAddPostMutation,
@@ -7,36 +8,40 @@ import {
 } from '../api/apiSlice';
 
 function CreatePost() {
-  const [username, setUsername] = useState('');
+  const [userId, setUserId] = useState(null); // Add state for userId
   const [category, setCategory] = useState('');
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
-  const token = localStorage.getItem('jwt'); // Retrieve the JWT token from local storage
-  const isLoggedIn = !!token; // Check if the user is logged in
+  const token = localStorage.getItem('jwtToken'); // Make sure this is the correct key
+  const isLoggedIn = !!token;
   const { data: categories, isLoading: isLoadingCategories, error: categoriesError } = useGetCategoriesQuery();
-  //const { data: userIdData, error: userIdError } = useGetUserIdQuery(username);
   const [addPost, { isLoading: isPosting, isError, isSuccess }] = useAddPostMutation();
   const navigate = useNavigate();
-  const userIdData = 56;
+
+  // Decode the JWT to get the user ID
+  useEffect(() => {
+    if (token) {
+      const decoded = jwt_decode(token);
+      setUserId(decoded.user_id);
+    }
+  }, [token]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Attempting to submit");
-    if (!userIdData) {
-      alert('Invalid username entered.');
+    if (!userId) {
+      alert('You must be logged in to create a post.');
       return;
     }
-    console.log("category", category);
     const postData = {
-        user_id: userIdData,  // Convert to integer
-        forum_category_id: parseInt(category), // Use correct key and convert to integer
-        title: title,
-        body: body,
-      };
-      console.log("Submitting form data:", postData);
+      user_id: userId,
+      forum_category_id: parseInt(category),
+      title: title,
+      body: body,
+    };
     try {
       await addPost(postData);
       alert('Post created successfully!');
-      navigate('/forums');  // Navigate to /forums URL
+      navigate('/forums');
     } catch (error) {
       alert('Error creating post.');
     }
@@ -45,19 +50,12 @@ function CreatePost() {
   if (isLoadingCategories) return <div>Loading categories...</div>;
   if (categoriesError) return <div>Error fetching categories.</div>;
 
-  console.log(categories); 
   return (
     <div>
       {isLoggedIn ? (
         <>
           <h2>Create New Post</h2>
           <form onSubmit={handleSubmit}>
-            <input
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              placeholder="Username"
-              required
-            />
             <select
               name="forum_category_id"
               value={category}
