@@ -24,7 +24,7 @@ function PostsList() {
     <div>
       <h2>Posts</h2>
       <ul>
-        {posts.map((post) => (
+        {Array.isArray(posts) && posts.map((post) => (
           <li key={post.id}>{post.title}</li>  // Adjust based on your post structure
         ))}
       </ul>
