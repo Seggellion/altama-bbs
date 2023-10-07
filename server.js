@@ -35,6 +35,8 @@ app.get('/api/user/:userId', async (req, res) => {
   
   try {
     const result = await pool.query('SELECT id, username, profile_image FROM users WHERE id = $1', [userId]);
+    console.log('result:', result);
+    console.log('userId:', userId);
     if (result.rows.length > 0) {
       res.json(result.rows[0]);  // Sending back the full user details
     } else {
