@@ -14,7 +14,7 @@ function Sidebar() {
       setUserId(decodedToken.user_id); // Assuming the user ID in the token is under "user_id"
     }
   }, []);
-  
+
   console.log("userId before the query:", userId);
   const { data: user, isLoading, isError } = useGetUserQuery(userId, {
     skip: !userId, // Skip the query if userId is null
@@ -24,7 +24,7 @@ function Sidebar() {
   if (isError) return <p>Error loading user information.</p>;
   console.log('user:', user);
   return (
-    <Box background="light-2" width="medium" pad="medium">
+    <Box background="black" width="medium" pad="medium">
       <Box>
         {/* User Profile Info */}
         {user ? (
