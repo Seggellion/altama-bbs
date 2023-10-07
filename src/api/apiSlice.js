@@ -3,14 +3,14 @@ import axios from 'axios';
 import { createApi } from '@reduxjs/toolkit/query/react';
 
 const axiosBaseQuery = ({ baseUrl }) => async ({ url, method, data }) => {
-  const token = localStorage.getItem('jwt'); // Retrieve the JWT token from local storage
+  const token = localStorage.getItem('jwtToken');  // Retrieve JWT token from local storage
+
+  const headers = {};
+  if (token) {
+    headers.Authorization = `Bearer ${token}`;
+  }
   try {
-    const result = await axios({
-      url: baseUrl + url,
-      method,
-      data,
-      headers: token ? { 'Authorization': `Bearer ${token}` } : undefined,
-    });
+    const result = await axios({ url: baseUrl + url, method, data, headers });
     return { data: result.data };
   } catch (axiosError) {
     let err = axiosError;
