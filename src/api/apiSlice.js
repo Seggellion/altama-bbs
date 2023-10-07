@@ -42,8 +42,11 @@ export const api = createApi({
     }),
     // Add this to your list of endpoints in apiSlice.js
     getUser: builder.query({
-      query: (userId) => `user/${userId}`,
-    }),
+      query: (userId) => {
+        console.log("userId inside the query:", userId);
+        return `user/${userId}`;
+      },
+    }),    
     addPost: builder.mutation({
       query: (newPost) => {
         return {
