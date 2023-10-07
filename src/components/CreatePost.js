@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'; // Add useEffect
 import { useNavigate } from 'react-router-dom';
 import jwt_decode from "jwt-decode"; // Import jwt_decode
-import './CreatePost.css';
+import '../CreatePost.css';
 
 import {
   useAddPostMutation,
