@@ -6,7 +6,7 @@ import { useGetUserQuery } from '../api/apiSlice'; // Adjust the import based on
 
 function Sidebar() {
   const [userId, setUserId] = useState(null);
-
+  console.log('userId', userId);
   useEffect(() => {
     const token = localStorage.getItem('jwtToken');
     if (token) {
