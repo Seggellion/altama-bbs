@@ -13,7 +13,8 @@ const axiosBaseQuery = ({ baseUrl }) => async ({ url, method, data }) => {
     headers.Authorization = `Bearer ${token}`;
   }
   try {
-    const result = await axios({ url: baseUrl + url, method, data, headers });
+    const result = await axios({ url: `${baseUrl}/${url}`, method, data, headers });
+
     console.log("Response Data:", result.data);
 
     return { data: result.data };
