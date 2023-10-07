@@ -41,3 +41,8 @@
   font-family: 'MSDOS';
   src: url('/public/assets/dos.ttf') format('truetype');
 }
+
+a, a:visited {
+  color: white; /* white text */
+  text-decoration: none; /* no underline */
+}

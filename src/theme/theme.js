@@ -14,6 +14,7 @@ const customTheme = deepMerge(grommet, {
     },
     font: {
       family: 'MSDOS, monospace', // Use custom font
+      fontSize: '12px'
     },
     edgeSize: {
       small: '14px',
@@ -34,6 +35,15 @@ const customTheme = deepMerge(grommet, {
     },
     extend: {
       fontFamily: 'MSDOS, Monaco, monospace', // Use custom font
+    },
+  },
+  box: {
+    background: 'black', // set the default background color for boxes to black
+  },
+  nav: {
+    a: {
+      color: 'white', // set the default color for hyperlinks to white
+      textDecoration: 'none', // remove underline from hyperlinks
     },
   },
 });

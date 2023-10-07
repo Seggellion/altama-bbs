@@ -56,20 +56,35 @@ function CreatePost() {
       {isLoggedIn ? (
         <>
           <h2>Create New Post</h2>
+
           <form onSubmit={handleSubmit}>
             <select
-              className="form-element" // Apply the CSS class
-              // ... (existing props)
+              className="form-element"
+              name="forum_category_id"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              required
             >
-              {/* ... (existing options) */}
+              <option value="" disabled>Select a category</option>
+              {Array.isArray(categories) && categories.map((categoryItem) => (
+                <option key={categoryItem.id} value={categoryItem.id}>
+                  {categoryItem.name}
+                </option>
+              ))}
             </select>
             <input
-              className="form-element" // Apply the CSS class
-              // ... (existing props)
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className="form-element"
+              placeholder="Title"
+              required
             />
             <textarea
-              className="form-element" // Apply the CSS class
-              // ... (existing props)
+              value={body}
+              onChange={(e) => setBody(e.target.value)}
+              className="form-element"
+              placeholder="Body"
+              required
             />
             <button type="submit" disabled={isPosting}>
               {isPosting ? 'Submitting...' : 'Submit'}
