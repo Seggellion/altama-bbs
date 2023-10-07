@@ -17,7 +17,7 @@ function CreatePost() {
   //const { data: userIdData, error: userIdError } = useGetUserIdQuery(username);
   const [addPost, { isLoading: isPosting, isError, isSuccess }] = useAddPostMutation();
   const navigate = useNavigate();
-
+  const userIdData = 56;
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Attempting to submit");
@@ -27,7 +27,7 @@ function CreatePost() {
     }
     console.log("category", category);
     const postData = {
-        user_id: parseInt(userIdData),  // Convert to integer
+        user_id: userIdData,  // Convert to integer
         forum_category_id: parseInt(category), // Use correct key and convert to integer
         title: title,
         body: body,
