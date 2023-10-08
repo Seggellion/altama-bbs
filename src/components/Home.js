@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import Ansi from 'ansi-to-react';
-
 
 
 const Home = () => {
     const [ansiContent, setAnsiContent] = useState('');
   
     useEffect(() => {
+        console.log("ansilove object:", window.ansilove);
       // Assume ansilove is a global object exposed by ansilove.js
       // If it's not global, you might need to import it differently
       const ansilove = window.ansilove;
