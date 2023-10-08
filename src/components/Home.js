@@ -9,7 +9,7 @@ const Home = () => {
         
         const script = document.createElement('script');
         debugger;
-        script.src = '/public/js/ansilove.js'; // Adjust the path as needed
+        script.src = '/js/ansilove.js'; // Adjust the path as needed
         script.onload = () => {
           // The script has loaded, do something
           if (window.AnsiLove) {
