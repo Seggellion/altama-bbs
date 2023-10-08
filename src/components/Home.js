@@ -5,7 +5,18 @@ const Home = () => {
     const [ansiContent, setAnsiContent] = useState('');
   
     useEffect(() => {
-        console.log("ansilove object:", window.ansilove);
+        
+        
+        const script = document.createElement('script');
+        script.src = '/public/js/ansilove.js'; // Adjust the path as needed
+        script.onload = () => {
+          // The script has loaded, do something
+          if (window.AnsiLove) {
+            console.log("AnsiLove loaded:", window.AnsiLove);
+          }
+        };
+        document.body.appendChild(script);
+
       // Assume ansilove is a global object exposed by ansilove.js
       // If it's not global, you might need to import it differently
       const ansilove = window.ansilove;
