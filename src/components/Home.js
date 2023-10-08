@@ -15,7 +15,7 @@ const Home = () => {
           return response.text();
         })
         .then((text) => {
-          console.log("Successfully fetched ANSI file.");
+          console.log("Successfully fetched ANSI file.", text);
           setAnsiContent(text);
         })
         .catch((error) => {
