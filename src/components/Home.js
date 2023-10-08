@@ -7,7 +7,7 @@ const Home = () => {
     useEffect(() => {
       console.log("Fetching ANSI file...");
       
-      fetch('/altama_bbs_graphic.ans')
+      fetch('/public/assets/altama_bbs_graphic.ans')
         .then((response) => {
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
