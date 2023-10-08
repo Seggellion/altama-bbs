@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes, Outlet } from 'react-router-dom
 import PostsList from './components/PostsList';
 import CreatePost from './components/CreatePost';
 import AppLayout from './components/AppLayout';
+import Home from './components/Home';
 import { getQueryParam } from './utils';
 import './App.css';
 
